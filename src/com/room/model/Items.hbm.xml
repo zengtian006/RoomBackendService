@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-2-10 15:27:37 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+	<class name="com.room.model.Items" table="items" catalog="room"
+		optimistic-lock="version">
+		<id name="id">
+			<column name="id" />
+			<generator class="uuid2">
+				<param name="uuid_gen_strategy_class">org.hibernate.id.uuid.CustomVersionOneStrategy</param>
+			</generator>
+		</id>
+		<property name="userId">
+			<column name="user_id" not-null="true" />
+		</property>
+
+		<property name="brand" type="string">
+			<column name="brand" length="45" />
+		</property>
+		<property name="title" type="string">
+			<column name="title" length="45" />
+		</property>
+		<property name="imageName" type="string">
+			<column name="image_name" length="45" />
+		</property>
+		<property name="remark" type="string">
+			<column name="remark" length="45" />
+		</property>
+		<property name="status" type="java.lang.Character">
+			<column name="status" length="1" />
+		</property>
+		<property name="cateId" type="java.lang.Integer">
+			<column name="cate_id" />
+		</property>
+	</class>
+</hibernate-mapping>
