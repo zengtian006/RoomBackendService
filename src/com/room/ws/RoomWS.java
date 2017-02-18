@@ -158,24 +158,19 @@ public class RoomWS implements Serializable {
 	@Path("findManCategories")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response findManCategories() {
-		List<Categories> cateList = roomServices.findManCategories();
-		GenericEntity<List<Categories>> cates = new GenericEntity<List<Categories>>(
-				cateList) {
-		};
-		return Response.ok(cates).build();
+	public List<Categories> findManCategories() {
+		return roomServices.findManCategories();
 	}
 
 	@GET
 	@Path("findWomenCategories")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response findWomenCategories() {
-		List<Categories> cateList = roomServices.findWomenCategories();
-		return Response.ok(cateList).build();
+	public List<Categories> findWomenCategories() {
+		return roomServices.findWomenCategories();
 	}
 
-	//must use Produces
+	// must use Produces
 	@GET
 	@Path("findSubCategoriesById/{cate_id}")
 	@Consumes(MediaType.APPLICATION_JSON)
