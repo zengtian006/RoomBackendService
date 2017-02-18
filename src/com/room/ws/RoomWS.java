@@ -175,6 +175,7 @@ public class RoomWS implements Serializable {
 		return Response.ok(cateList).build();
 	}
 
+	//must use Produces
 	@GET
 	@Path("findSubCategoriesById/{cate_id}")
 	@Consumes(MediaType.APPLICATION_JSON)

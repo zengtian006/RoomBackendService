@@ -9,7 +9,7 @@ import com.room.ws.RoomWS;
 public class MyApplication extends ResourceConfig {
 	public MyApplication() {
 		register(RequestContextFilter.class);
-
+		
 		// register(org.glassfish.jersey.server.filter.UriConnegFilter.class);
 		register(RoomWS.class);
 		register(CustomExceptionMapper.class);
