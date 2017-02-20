@@ -132,7 +132,7 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 			session = sessionFactory.openSession();
 			System.out.println("user id: " + user_id);
 			List<Items> users = (List<Items>) session
-					.createQuery("FROM Items where hex(userId) =:user_id")
+					.createQuery("FROM Items where hex(user.id) =:user_id")
 					.setParameter("user_id", user_id).getResultList();
 			return users;
 		} catch (Exception e) {

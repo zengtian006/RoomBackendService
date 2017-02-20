@@ -28,14 +28,23 @@ public class Items implements java.io.Serializable {
 	@Column(columnDefinition = "BINARY(16)")
 	private UUID id;
 
-	@XmlJavaTypeAdapter(UUIDAdapter.class)
-	private UUID userId;
+//	@XmlJavaTypeAdapter(UUIDAdapter.class)
+//	private UUID userId;
 	private String brand;
 	private String title;
 	private String imageName;
 	private String remark;
 	private Character status;
 	private Integer cateId;
+	private User user;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public Integer getCateId() {
 		return cateId;
@@ -56,13 +65,13 @@ public class Items implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public UUID getUserId() {
-		return userId;
-	}
-
-	public void setUserId(UUID userId) {
-		this.userId = userId;
-	}
+//	public UUID getUserId() {
+//		return userId;
+//	}
+//
+//	public void setUserId(UUID userId) {
+//		this.userId = userId;
+//	}
 
 	public String getBrand() {
 		return this.brand;

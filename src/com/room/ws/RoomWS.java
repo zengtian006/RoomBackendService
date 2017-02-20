@@ -82,7 +82,6 @@ public class RoomWS implements Serializable {
 		System.out.println(item.getBrand());
 		// item.setUserId(UUID.randomUUID());
 		System.out.println(item.getImageName());
-		System.out.println(item.getUserId().toString());
 		return String.valueOf(roomServices.addItems(item));
 	}
 
