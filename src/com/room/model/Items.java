@@ -1,5 +1,6 @@
 package com.room.model;
 
+import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -28,8 +29,8 @@ public class Items implements java.io.Serializable {
 	@Column(columnDefinition = "BINARY(16)")
 	private UUID id;
 
-//	@XmlJavaTypeAdapter(UUIDAdapter.class)
-//	private UUID userId;
+	// @XmlJavaTypeAdapter(UUIDAdapter.class)
+	// private UUID userId;
 	private String brand;
 	private String title;
 	private String imageName;
@@ -37,6 +38,7 @@ public class Items implements java.io.Serializable {
 	private Character status;
 	private Integer cateId;
 	private User user;
+	private Date date;
 
 	public User getUser() {
 		return user;
@@ -65,13 +67,13 @@ public class Items implements java.io.Serializable {
 		this.id = id;
 	}
 
-//	public UUID getUserId() {
-//		return userId;
-//	}
-//
-//	public void setUserId(UUID userId) {
-//		this.userId = userId;
-//	}
+	// public UUID getUserId() {
+	// return userId;
+	// }
+	//
+	// public void setUserId(UUID userId) {
+	// this.userId = userId;
+	// }
 
 	public String getBrand() {
 		return this.brand;
@@ -111,6 +113,14 @@ public class Items implements java.io.Serializable {
 
 	public void setStatus(Character status) {
 		this.status = status;
+	}
+
+	public Date getDate() {
+		return this.date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 }

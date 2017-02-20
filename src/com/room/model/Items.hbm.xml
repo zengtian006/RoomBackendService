@@ -36,5 +36,8 @@
 			fetch="select">
 			<column name="user_id" not-null="true" />
 		</many-to-one>
+		<property name="date" type="date">
+			<column name="date" length="10" />
+		</property>
 	</class>
 </hibernate-mapping>
