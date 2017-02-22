@@ -240,4 +240,27 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 			}
 		}
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Items> findAllGlobalItems() {
+		Session session = null;
+
+		try {
+			session = sessionFactory.openSession();
+			List<Items> users = (List<Items>) session
+					.createQuery("FROM Items where global =:global")
+					.setParameter("global", "1").getResultList();
+			return users;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+				session = null;
+			}
+
+		}
+	}
 }

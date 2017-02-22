@@ -194,4 +194,12 @@ public class RoomWS implements Serializable {
 		boolean result = roomServices.updateItems(item);
 		return String.valueOf(result);
 	}
+
+	@GET
+	@Path("findAllGlobalItems")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public List<Items> findAllGlobalItems() {
+		// UUID uuid = UUID.fromString(user_id);
+		return roomServices.findAllGlobalItems();
+	}
 }

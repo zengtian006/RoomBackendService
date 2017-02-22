@@ -29,4 +29,6 @@ public interface RoomServices {
 
 	public boolean updateItems(Items item);
 
+	public List<Items> findAllGlobalItems();
+
 }

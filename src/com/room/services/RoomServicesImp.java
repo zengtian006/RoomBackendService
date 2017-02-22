@@ -73,4 +73,10 @@ public class RoomServicesImp implements RoomServices, Serializable {
 		// TODO Auto-generated method stub
 		return roomDAO.updateItems(item);
 	}
+
+	@Override
+	public List<Items> findAllGlobalItems() {
+		// TODO Auto-generated method stub
+		return roomDAO.findAllGlobalItems();
+	}
 }

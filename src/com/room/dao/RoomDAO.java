@@ -26,4 +26,6 @@ public interface RoomDAO {
 	public List<Categories> findSubCategoriesById(Integer cate_id);
 
 	public boolean updateItems(Items item);
+
+	public List<Items> findAllGlobalItems();
 };
