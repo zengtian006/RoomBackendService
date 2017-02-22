@@ -2,6 +2,7 @@ package com.room.ws;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
@@ -130,6 +131,8 @@ public class RoomWS implements Serializable {
 
 					}
 				}
+				Collections.sort(filetedAllItems);
+
 				itemSeries.setItems(filetedAllItems);
 				System.out.println("title:" + itemSeries.getTitle());
 				System.out.println("size:" + itemSeries.getItems().size());
@@ -198,6 +201,7 @@ public class RoomWS implements Serializable {
 	@GET
 	@Path("findAllGlobalItems")
 	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public List<Items> findAllGlobalItems() {
 		// UUID uuid = UUID.fromString(user_id);
 		return roomServices.findAllGlobalItems();

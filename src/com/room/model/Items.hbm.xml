@@ -36,11 +36,14 @@
 			fetch="select">
 			<column name="user_id" not-null="true" />
 		</many-to-one>
-		<property name="date" type="date">
-			<column name="date" length="10" />
+		<property name="date" type="string">
+			<column name="date" />
 		</property>
 		<property name="global" type="string">
 			<column name="global" length="1" />
+		</property>
+		<property name="created" type="string">
+			<column name="created" />
 		</property>
 	</class>
 </hibernate-mapping>

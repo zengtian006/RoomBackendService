@@ -132,7 +132,8 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 			session = sessionFactory.openSession();
 			System.out.println("user id: " + user_id);
 			List<Items> users = (List<Items>) session
-					.createQuery("FROM Items where hex(user.id) =:user_id")
+					.createQuery(
+							"FROM Items i where hex(user.id) =:user_id ORDER BY i.created DESC")
 					.setParameter("user_id", user_id).getResultList();
 			return users;
 		} catch (Exception e) {
@@ -180,7 +181,7 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 			session = sessionFactory.openSession();
 
 			List<Categories> cates = (List<Categories>) session
-					.createQuery("FROM Categories where is_man= :is_man")
+					.createQuery("FROM Categories c where is_man= :is_man")
 					.setParameter("is_man", "N").getResultList();
 			return cates;
 		} catch (Exception e) {
@@ -249,7 +250,8 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 		try {
 			session = sessionFactory.openSession();
 			List<Items> users = (List<Items>) session
-					.createQuery("FROM Items where global =:global")
+					.createQuery(
+							"FROM Items i where i.global =:global  ORDER BY i.created DESC")
 					.setParameter("global", "1").getResultList();
 			return users;
 		} catch (Exception e) {
