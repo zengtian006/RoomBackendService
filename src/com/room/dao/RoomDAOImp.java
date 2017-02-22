@@ -218,4 +218,26 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 
 		}
 	}
+
+	@Override
+	public boolean updateItems(Items item) {
+		Session session = null;
+		Transaction tx = null;
+		try {
+			session = sessionFactory.openSession();
+			tx = session.beginTransaction();
+			session.update(item);
+			tx.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tx.rollback();
+			return false;
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+				session = null;
+			}
+		}
+	}
 }

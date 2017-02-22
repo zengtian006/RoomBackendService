@@ -26,7 +26,7 @@
 		<property name="remark" type="string">
 			<column name="remark" length="45" />
 		</property>
-		<property name="status" type="java.lang.Character">
+		<property name="status" type="string">
 			<column name="status" length="1" />
 		</property>
 		<property name="cateId" type="java.lang.Integer">
@@ -38,6 +38,9 @@
 		</many-to-one>
 		<property name="date" type="date">
 			<column name="date" length="10" />
+		</property>
+		<property name="global" type="string">
+			<column name="global" length="1" />
 		</property>
 	</class>
 </hibernate-mapping>

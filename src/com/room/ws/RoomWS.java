@@ -185,4 +185,13 @@ public class RoomWS implements Serializable {
 		// return Response.ok(cates).build();
 		return roomServices.findSubCategoriesById(cate_id);
 	}
+
+	@POST
+	@Path("updateItem")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String updateItems(Items item) {
+		boolean result = roomServices.updateItems(item);
+		return String.valueOf(result);
+	}
 }

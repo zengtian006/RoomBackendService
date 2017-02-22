@@ -66,4 +66,11 @@ public class RoomServicesImp implements RoomServices, Serializable {
 		// TODO Auto-generated method stub
 		return roomDAO.findSubCategoriesById(cate_id);
 	}
+
+	@Transactional(readOnly = false)
+	@Override
+	public boolean updateItems(Items item) {
+		// TODO Auto-generated method stub
+		return roomDAO.updateItems(item);
+	}
 }

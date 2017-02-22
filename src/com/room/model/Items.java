@@ -27,6 +27,7 @@ public class Items implements java.io.Serializable {
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "uuid2")
 	@Column(columnDefinition = "BINARY(16)")
+	@XmlJavaTypeAdapter(UUIDAdapter.class)
 	private UUID id;
 
 	// @XmlJavaTypeAdapter(UUIDAdapter.class)
@@ -35,10 +36,19 @@ public class Items implements java.io.Serializable {
 	private String title;
 	private String imageName;
 	private String remark;
-	private Character status;
+	private String status;
 	private Integer cateId;
 	private User user;
 	private Date date;
+	private String global;
+
+	public String getGlobal() {
+		return global;
+	}
+
+	public void setGlobal(String global) {
+		this.global = global;
+	}
 
 	public User getUser() {
 		return user;
@@ -107,11 +117,11 @@ public class Items implements java.io.Serializable {
 		this.remark = remark;
 	}
 
-	public Character getStatus() {
+	public String getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(Character status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 

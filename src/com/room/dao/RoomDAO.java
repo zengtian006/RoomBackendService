@@ -24,4 +24,6 @@ public interface RoomDAO {
 	public List<Categories> findWomenCategories();
 
 	public List<Categories> findSubCategoriesById(Integer cate_id);
+
+	public boolean updateItems(Items item);
 };
