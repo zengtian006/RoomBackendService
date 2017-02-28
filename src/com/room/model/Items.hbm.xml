@@ -45,5 +45,8 @@
 		<property name="created" type="string">
 			<column name="created" />
 		</property>
+		<property name="expDate" type="string">
+			<column name="exp_date" />
+		</property>
 	</class>
 </hibernate-mapping>

@@ -45,6 +45,7 @@ public class Items implements java.io.Serializable, Comparable<Items> {
 	private String date;
 	private String global;
 	private String created;
+	private String expDate;
 
 	public String getCreated() {
 		return created;
@@ -159,5 +160,13 @@ public class Items implements java.io.Serializable, Comparable<Items> {
 		}
 		/* For Descending order do like this */
 		return (int) date1.getTime() - (int) date2.getTime();
+	}
+
+	public String getExpDate() {
+		return expDate;
+	}
+
+	public void setExpDate(String expDate) {
+		this.expDate = expDate;
 	}
 }
