@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.room.model.ItemTags;
 import com.room.model.Items;
 import com.room.model.Categories;
 import com.room.model.User;
@@ -106,9 +107,18 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 		Session session = null;
 		Transaction tx = null;
 		try {
+			item.setDate(null);// delete later
 			session = sessionFactory.openSession();
 			tx = session.beginTransaction();
 			session.persist(item);
+			for (int i = 0; i < item.getTags().size(); i++) {
+				ItemTags it = new ItemTags(item.getId(), item.getTags().get(i));
+				session.persist(it);
+				if (i % 20 == 0) {
+					session.flush();
+					session.clear();
+				}
+			}
 			tx.commit();
 			return true;
 		} catch (Exception e) {

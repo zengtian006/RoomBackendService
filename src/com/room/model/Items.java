@@ -3,6 +3,7 @@ package com.room.model;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -46,6 +47,15 @@ public class Items implements java.io.Serializable, Comparable<Items> {
 	private String global;
 	private String created;
 	private String expDate;
+	private List<String> tags;
+
+	public List<String> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<String> tags) {
+		this.tags = tags;
+	}
 
 	public String getCreated() {
 		return created;
