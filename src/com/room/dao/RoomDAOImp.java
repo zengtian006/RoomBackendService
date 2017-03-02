@@ -275,4 +275,40 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 
 		}
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Items> findAlmostOverdueItem(String interval, String now) {
+		Session session = null;
+		System.out.println("INTERVAL: " + interval);
+		System.out.println("now: " + now);
+
+		try {
+			session = sessionFactory.openSession();
+			List<Items> users = null;
+			if (interval.equals(now)) {// already overduedItem
+				users = (List<Items>) session
+						.createQuery(
+								"FROM Items i where i.expDate< :now ORDER BY i.expDate ASC")
+						.setParameter("now", now).getResultList();
+			} else {
+				users = (List<Items>) session
+						.createQuery(
+								"FROM Items i where i.expDate<= :interval and i.expDate>= :now ORDER BY i.expDate ASC")
+						.setParameter("interval", interval)
+						.setParameter("now", now).getResultList();
+
+			}
+			return users;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+				session = null;
+			}
+
+		}
+	}
 }

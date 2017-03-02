@@ -28,4 +28,6 @@ public interface RoomDAO {
 	public boolean updateItems(Items item);
 
 	public List<Items> findAllGlobalItems();
+
+	public List<Items> findAlmostOverdueItem(String interval, String now);
 };

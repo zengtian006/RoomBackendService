@@ -79,4 +79,10 @@ public class RoomServicesImp implements RoomServices, Serializable {
 		// TODO Auto-generated method stub
 		return roomDAO.findAllGlobalItems();
 	}
+
+	@Override
+	public List<Items> findAlmostOverdueItem(String interval, String now) {
+		// TODO Auto-generated method stub
+		return roomDAO.findAlmostOverdueItem(interval, now);
+	}
 }

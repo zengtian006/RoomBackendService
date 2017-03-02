@@ -1,7 +1,10 @@
 package com.room.ws;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -205,5 +208,17 @@ public class RoomWS implements Serializable {
 	public List<Items> findAllGlobalItems() {
 		// UUID uuid = UUID.fromString(user_id);
 		return roomServices.findAllGlobalItems();
+	}
+
+	@GET
+	@Path("findAlmostOverdueItem/{date}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Items> findAlmostOverdueItem(@PathParam("date") Integer date) {
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar c = Calendar.getInstance();
+		String now = df.format(c.getTime());
+		c.add(Calendar.MONTH, date);
+		String interval = df.format(c.getTime());
+		return roomServices.findAlmostOverdueItem(interval, now);
 	}
 }

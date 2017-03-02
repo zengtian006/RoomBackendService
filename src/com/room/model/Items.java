@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.room.utils.UUIDAdapter;

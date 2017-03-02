@@ -31,4 +31,6 @@ public interface RoomServices {
 
 	public List<Items> findAllGlobalItems();
 
+	public List<Items> findAlmostOverdueItem(String interval, String now);
+
 }
