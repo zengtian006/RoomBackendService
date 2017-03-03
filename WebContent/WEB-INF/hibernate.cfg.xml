@@ -11,5 +11,6 @@
 		<mapping resource="com/room/model/Items.hbm.xml" />
 		<mapping resource="com/room/model/Categories.hbm.xml" />
 		<mapping resource="com/room/model/ItemTags.hbm.xml" />
+		<mapping resource="com/room/model/ItemLikes.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

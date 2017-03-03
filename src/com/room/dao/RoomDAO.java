@@ -12,6 +12,8 @@ public interface RoomDAO {
 	public List<User> getUUID();
 
 	public void addUUID();
+	
+	public void addTAGS();
 
 	public User login(User user);
 

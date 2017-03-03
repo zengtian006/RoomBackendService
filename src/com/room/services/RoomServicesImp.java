@@ -25,7 +25,13 @@ public class RoomServicesImp implements RoomServices, Serializable {
 	public List<User> getUUID() {
 		return roomDAO.getUUID();
 	}
-
+	
+	@Transactional(readOnly = false)
+	@Override
+	public void addTAGS() {
+		roomDAO.addTAGS();
+	}
+	
 	@Transactional(readOnly = false)
 	@Override
 	public void addUUID() {

@@ -66,6 +66,14 @@ public class RoomWS implements Serializable {
 		userResponse.setUser(loginUser);
 		return userResponse;
 	}
+	
+	@POST
+	@Path("addLikes")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String addTAGS() {
+		roomServices.addTAGS();
+		return "ture";
+	}
 
 	@POST
 	@Path("addUUID")

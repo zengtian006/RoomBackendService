@@ -53,6 +53,10 @@ public class Items implements java.io.Serializable, Comparable<Items> {
 	private String expDate;
 	private List<String> tags;
 	private List<ItemTags> itemTags;
+	private List<ItemLikes> itemLikes;
+    private Integer likesCount;
+    private boolean isLiked;
+
 
 	public List<String> getTags() {
 		return tags;
@@ -191,6 +195,30 @@ public class Items implements java.io.Serializable, Comparable<Items> {
 
 	public void setItemTags(List<ItemTags> itemTags) {
 		this.itemTags = itemTags;
+	}
+
+	public List<ItemLikes> getItemLikes() {
+		return itemLikes;
+	}
+
+	public void setItemLikes(List<ItemLikes> itemLikes) {
+		this.itemLikes = itemLikes;
+	}
+
+	public Integer getLikesCount() {
+		return likesCount;
+	}
+
+	public void setLikesCount(Integer likesCount) {
+		this.likesCount = likesCount;
+	}
+
+	public boolean isLiked() {
+		return isLiked;
+	}
+
+	public void setLiked(boolean isLiked) {
+		this.isLiked = isLiked;
 	}
 
 }

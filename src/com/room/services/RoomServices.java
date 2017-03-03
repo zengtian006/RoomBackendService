@@ -12,6 +12,8 @@ import com.room.model.User;
 public interface RoomServices {
 
 	public List<User> getUUID();
+	
+	public void addTAGS();
 
 	public void addUUID();
 

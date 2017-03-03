@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.room.model.ItemLikes;
 import com.room.model.ItemTags;
 import com.room.model.Items;
 import com.room.model.Categories;
@@ -48,6 +49,33 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 
 		}
 
+	}
+	
+	@Override
+	public void addTAGS() {
+		Session session = null;
+		Transaction tx = null;
+
+		ItemLikes like = new ItemLikes();
+		like.setItemId(UUID.fromString("0a00036a-5a89-1bbb-815a-893be4070000"));
+		like.setUserId(UUID.fromString("0a00036a-5a26-1b79-815a-269d607e0000"));
+		// user.setId(uuId);
+
+		try {
+			session = sessionFactory.openSession();
+			tx = session.beginTransaction();
+			session.persist(like);
+			tx.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			tx.rollback();
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+				session = null;
+			}
+		}
+		
 	}
 
 	@Override
@@ -153,6 +181,11 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 					tagList.add(tag.getTag());
 				}
 				item.setTags(tagList);
+				if (item.getItemLikes().isEmpty()) {
+					item.setLikesCount(0);
+				}else{
+					item.setLikesCount(item.getItemLikes().size());
+				}
 			}
 			// for (Items item : items) {
 			// Iterator<ItemTags> iterator = item.getItemTags().iterator();
