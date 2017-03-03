@@ -48,5 +48,15 @@
 		<property name="expDate" type="string">
 			<column name="exp_date" />
 		</property>
+		<bag name="itemTags" table="item_tags" inverse="true" lazy="true"
+			fetch="select">
+			<key column="item_id" not-null="true" />
+			<one-to-many class="com.room.model.ItemTags" />
+		</bag>
+		<!--<list name="itemTags" table="item_tags" inverse="false" cascade="all"> 
+			<key column="item_id" /> <list-index column="id" /> <one-to-many class="com.room.model.ItemTags" 
+			/> </list> <set name="itemTags" table="item_tags" inverse="true" lazy="true" 
+			fetch="select"> <key> <column name="item_id" not-null="true" /> </key> <one-to-many 
+			class="com.room.model.ItemTags" /> </set> -->
 	</class>
 </hibernate-mapping>

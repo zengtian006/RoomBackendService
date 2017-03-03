@@ -2,13 +2,18 @@ package com.room.model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -47,6 +52,7 @@ public class Items implements java.io.Serializable, Comparable<Items> {
 	private String created;
 	private String expDate;
 	private List<String> tags;
+	private List<ItemTags> itemTags;
 
 	public List<String> getTags() {
 		return tags;
@@ -178,4 +184,13 @@ public class Items implements java.io.Serializable, Comparable<Items> {
 	public void setExpDate(String expDate) {
 		this.expDate = expDate;
 	}
+
+	public List<ItemTags> getItemTags() {
+		return itemTags;
+	}
+
+	public void setItemTags(List<ItemTags> itemTags) {
+		this.itemTags = itemTags;
+	}
+
 }

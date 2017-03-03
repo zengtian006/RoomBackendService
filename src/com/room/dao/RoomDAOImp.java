@@ -1,6 +1,8 @@
 package com.room.dao;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -141,11 +143,25 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 		try {
 			session = sessionFactory.openSession();
 			System.out.println("user id: " + user_id);
-			List<Items> users = (List<Items>) session
+			List<Items> items = (List<Items>) session
 					.createQuery(
-							"FROM Items i where hex(user.id) =:user_id ORDER BY i.created DESC")
+							"FROM Items i WHERE hex(user.id) =:user_id ORDER BY i.created DESC")
 					.setParameter("user_id", user_id).getResultList();
-			return users;
+			for (Items item : items) {
+				System.out.println("TAG SIZE: " + item.getItemTags().size());
+			}
+			// for (Items item : items) {
+			// Iterator<ItemTags> iterator = item.getItemTags().iterator();
+			// List<String> tagList = new ArrayList<>();
+			// while (iterator.hasNext()) {
+			// String tag = iterator.next().getTag();
+			// System.out.println("TAG:" + tag);
+			// tagList.add(tag);
+			// }
+			// item.setTags(tagList);
+			// item.setItemTags(null);
+			// }
+			return items;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
