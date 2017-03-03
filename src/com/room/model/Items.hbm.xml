@@ -48,7 +48,7 @@
 		<property name="expDate" type="string">
 			<column name="exp_date" />
 		</property>
-		<bag name="itemTags" table="item_tags" inverse="true" lazy="true"
+		<bag name="itemTags" table="item_tags" inverse="true" lazy="false"
 			fetch="select">
 			<key column="item_id" not-null="true" />
 			<one-to-many class="com.room.model.ItemTags" />

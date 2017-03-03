@@ -148,7 +148,11 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 							"FROM Items i WHERE hex(user.id) =:user_id ORDER BY i.created DESC")
 					.setParameter("user_id", user_id).getResultList();
 			for (Items item : items) {
-				System.out.println("TAG SIZE: " + item.getItemTags().size());
+				List<String> tagList = new ArrayList<>();
+				for (ItemTags tag : item.getItemTags()) {
+					tagList.add(tag.getTag());
+				}
+				item.setTags(tagList);
 			}
 			// for (Items item : items) {
 			// Iterator<ItemTags> iterator = item.getItemTags().iterator();
