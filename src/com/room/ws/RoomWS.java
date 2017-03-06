@@ -4,11 +4,15 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
@@ -28,7 +32,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import com.room.model.ItemSeason;
 import com.room.model.ItemSeries;
+import com.room.model.ItemTags;
 import com.room.model.Items;
 import com.room.model.Categories;
 import com.room.model.User;
@@ -66,7 +72,7 @@ public class RoomWS implements Serializable {
 		userResponse.setUser(loginUser);
 		return userResponse;
 	}
-	
+
 	@POST
 	@Path("addLikes")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -112,16 +118,19 @@ public class RoomWS implements Serializable {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public List<ItemSeries> findAllItems(User user) {
+		List<ItemSeries> itemSeriesList = new ArrayList<ItemSeries>();
 
 		String user_id = user.getId().toString().replaceAll("-", "");
 		List<Items> items = roomServices.findAllItems(user_id);
+
+		// init Categroy
 		List<Categories> categories = new ArrayList<Categories>();
 		if (user.getGender().equals("M")) {
 			categories = roomServices.findManCategories();
 		} else {
 			categories = roomServices.findWomenCategories();
 		}
-		List<ItemSeries> itemSeriesList = new ArrayList<ItemSeries>();
+
 		for (Categories cate : categories) {
 			if (cate.getParentId() == 0) {
 				ItemSeries itemSeries = new ItemSeries();
@@ -144,6 +153,43 @@ public class RoomWS implements Serializable {
 				}
 				Collections.sort(filetedAllItems);
 
+				// init Tags like season
+				List<String> allTagsList = new ArrayList<>();
+				for (Items item : filetedAllItems) {
+					List<String> tagList = new ArrayList<>();
+					for (ItemTags tag : item.getItemTags()) {
+						tagList.add(tag.getTag());
+					}
+					item.setTags(tagList);
+					allTagsList.addAll(tagList);
+
+					if (item.getItemLikes().isEmpty()) {
+						item.setLikesCount(0);
+					} else {
+						item.setLikesCount(item.getItemLikes().size());
+					}
+
+					List<String> seasonList = new ArrayList<>();
+					for (ItemSeason season : item.getItemSeason()) {
+						seasonList.add(season.getSeason());
+					}
+					item.setSeasons(seasonList);
+				}
+				Map<String, Long> result = allTagsList.stream().collect(
+						Collectors.groupingBy(Function.identity(),
+								Collectors.counting()));
+
+				Map<String, Long> finalMap = new LinkedHashMap<>();
+
+				// Sort a map and add to finalMap
+				result.entrySet()
+						.stream()
+						.sorted(Map.Entry.<String, Long> comparingByValue()
+								.reversed())
+						.forEachOrdered(
+								e -> finalMap.put(e.getKey(), e.getValue()));
+
+				itemSeries.setAllTagsMap(finalMap);
 				itemSeries.setItems(filetedAllItems);
 				System.out.println("title:" + itemSeries.getTitle());
 				System.out.println("size:" + itemSeries.getItems().size());

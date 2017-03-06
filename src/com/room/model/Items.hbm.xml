@@ -58,6 +58,11 @@
 			<key column="item_id" not-null="true" />
 			<one-to-many class="com.room.model.ItemLikes" />
 		</bag>
+		<bag name="itemSeason" table="item_season" inverse="true" lazy="false"
+			fetch="select">
+			<key column="item_id" not-null="true" />
+			<one-to-many class="com.room.model.ItemSeason" />
+		</bag>
 		<!--<list name="itemTags" table="item_tags" inverse="false" cascade="all"> 
 			<key column="item_id" /> <list-index column="id" /> <one-to-many class="com.room.model.ItemTags" 
 			/> </list> <set name="itemTags" table="item_tags" inverse="true" lazy="true" 

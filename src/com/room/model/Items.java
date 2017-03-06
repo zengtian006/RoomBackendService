@@ -52,11 +52,12 @@ public class Items implements java.io.Serializable, Comparable<Items> {
 	private String created;
 	private String expDate;
 	private List<String> tags;
+	private List<String> seasons;
 	private List<ItemTags> itemTags;
 	private List<ItemLikes> itemLikes;
-    private Integer likesCount;
-    private boolean isLiked;
-
+	private List<ItemSeason> itemSeason;
+	private Integer likesCount;
+	private boolean isLiked;
 
 	public List<String> getTags() {
 		return tags;
@@ -219,6 +220,22 @@ public class Items implements java.io.Serializable, Comparable<Items> {
 
 	public void setLiked(boolean isLiked) {
 		this.isLiked = isLiked;
+	}
+
+	public List<String> getSeasons() {
+		return seasons;
+	}
+
+	public void setSeasons(List<String> seasons) {
+		this.seasons = seasons;
+	}
+
+	public List<ItemSeason> getItemSeason() {
+		return itemSeason;
+	}
+
+	public void setItemSeason(List<ItemSeason> itemSeason) {
+		this.itemSeason = itemSeason;
 	}
 
 }

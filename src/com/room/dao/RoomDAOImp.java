@@ -12,6 +12,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.room.model.ItemLikes;
+import com.room.model.ItemSeason;
 import com.room.model.ItemTags;
 import com.room.model.Items;
 import com.room.model.Categories;
@@ -50,7 +51,7 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 		}
 
 	}
-	
+
 	@Override
 	public void addTAGS() {
 		Session session = null;
@@ -75,7 +76,7 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 				session = null;
 			}
 		}
-		
+
 	}
 
 	@Override
@@ -149,6 +150,11 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 					session.clear();
 				}
 			}
+			for (int i = 0; i < item.getSeasons().size(); i++) {
+				ItemSeason is = new ItemSeason(item.getId(), item.getSeasons()
+						.get(i));
+				session.persist(is);
+			}
 			tx.commit();
 			return true;
 		} catch (Exception e) {
@@ -175,18 +181,6 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 					.createQuery(
 							"FROM Items i WHERE hex(user.id) =:user_id ORDER BY i.created DESC")
 					.setParameter("user_id", user_id).getResultList();
-			for (Items item : items) {
-				List<String> tagList = new ArrayList<>();
-				for (ItemTags tag : item.getItemTags()) {
-					tagList.add(tag.getTag());
-				}
-				item.setTags(tagList);
-				if (item.getItemLikes().isEmpty()) {
-					item.setLikesCount(0);
-				}else{
-					item.setLikesCount(item.getItemLikes().size());
-				}
-			}
 			// for (Items item : items) {
 			// Iterator<ItemTags> iterator = item.getItemTags().iterator();
 			// List<String> tagList = new ArrayList<>();

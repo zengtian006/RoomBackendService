@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-3-1 17:10:45 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.room.model.ItemSeason" table="item_season"
+		catalog="room">
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="identity" />
+		</id>
+		<property name="itemId">
+			<column name="item_id" />
+		</property>
+		<property name="season" type="string">
+			<column name="season" length="100" />
+		</property>
+	</class>
+</hibernate-mapping>
