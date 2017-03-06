@@ -7,7 +7,7 @@ public class ItemSeries {
 	private String title;
 	private Integer cate_id;
 	private List<Items> items;
-	private Map<String, Long> allTagsMap;
+	private List<TagEntry> allTagsMap;
 
 	public Integer getCate_id() {
 		return cate_id;
@@ -33,11 +33,11 @@ public class ItemSeries {
 		this.items = items;
 	}
 
-	public Map<String, Long> getAllTagsMap() {
+	public List<TagEntry> getAllTagsMap() {
 		return allTagsMap;
 	}
 
-	public void setAllTagsMap(Map<String, Long> allTagsMap) {
+	public void setAllTagsMap(List<TagEntry> allTagsMap) {
 		this.allTagsMap = allTagsMap;
 	}
 }

@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -37,6 +38,7 @@ import com.room.model.ItemSeries;
 import com.room.model.ItemTags;
 import com.room.model.Items;
 import com.room.model.Categories;
+import com.room.model.TagEntry;
 import com.room.model.User;
 import com.room.model.UserResponse;
 import com.room.services.RoomServices;
@@ -189,10 +191,16 @@ public class RoomWS implements Serializable {
 						.forEachOrdered(
 								e -> finalMap.put(e.getKey(), e.getValue()));
 
-				itemSeries.setAllTagsMap(finalMap);
+				List<TagEntry> tagEntryList = new ArrayList<>();
+				Iterator<Entry<String, Long>> iter = finalMap.entrySet().iterator();
+				while (iter.hasNext()) {
+					Map.Entry entry = (Map.Entry) iter.next();
+					String key = (String) entry.getKey();
+					Long val = (Long) entry.getValue();
+					tagEntryList.add(new TagEntry(key,val));
+				}
+				itemSeries.setAllTagsMap(tagEntryList);
 				itemSeries.setItems(filetedAllItems);
-				System.out.println("title:" + itemSeries.getTitle());
-				System.out.println("size:" + itemSeries.getItems().size());
 				itemSeriesList.add(itemSeries);
 			}
 		}
