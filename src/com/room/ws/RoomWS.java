@@ -192,12 +192,14 @@ public class RoomWS implements Serializable {
 								e -> finalMap.put(e.getKey(), e.getValue()));
 
 				List<TagEntry> tagEntryList = new ArrayList<>();
-				Iterator<Entry<String, Long>> iter = finalMap.entrySet().iterator();
+				Iterator<Entry<String, Long>> iter = finalMap.entrySet()
+						.iterator();
 				while (iter.hasNext()) {
-					Map.Entry entry = (Map.Entry) iter.next();
+					Entry<String, Long> entry = iter.next();
 					String key = (String) entry.getKey();
 					Long val = (Long) entry.getValue();
-					tagEntryList.add(new TagEntry(key,val));
+					System.out.println(key + ":" + val);
+					tagEntryList.add(new TagEntry(key, val));
 				}
 				itemSeries.setAllTagsMap(tagEntryList);
 				itemSeries.setItems(filetedAllItems);
