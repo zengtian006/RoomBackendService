@@ -358,4 +358,49 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 
 		}
 	}
+
+	@Override
+	public boolean updateUser(User user) {
+		Session session = null;
+		Transaction tx = null;
+		try {
+			session = sessionFactory.openSession();
+			tx = session.beginTransaction();
+			session.update(user);
+			tx.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tx.rollback();
+			return false;
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+				session = null;
+			}
+		}
+	}
+
+	@Override
+	public User addUser(User user) {
+		Session session = null;
+		Transaction tx = null;
+
+		try {
+			session = sessionFactory.openSession();
+			tx = session.beginTransaction();
+			session.persist(user);
+			tx.commit();
+			return user;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tx.rollback();
+			return null;
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+				session = null;
+			}
+		}
+	}
 }

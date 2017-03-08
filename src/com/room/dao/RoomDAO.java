@@ -1,10 +1,9 @@
 package com.room.dao;
 
 import java.util.List;
-import java.util.UUID;
 
-import com.room.model.Items;
 import com.room.model.Categories;
+import com.room.model.Items;
 import com.room.model.User;
 
 public interface RoomDAO {
@@ -12,10 +11,14 @@ public interface RoomDAO {
 	public List<User> getUUID();
 
 	public void addUUID();
-	
+
 	public void addTAGS();
 
 	public User login(User user);
+
+	public boolean updateUser(User user);
+
+	public User addUser(User user);
 
 	public boolean addItems(Items item);
 

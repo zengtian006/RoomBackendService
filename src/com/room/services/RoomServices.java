@@ -12,12 +12,16 @@ import com.room.model.User;
 public interface RoomServices {
 
 	public List<User> getUUID();
-	
+
 	public void addTAGS();
 
 	public void addUUID();
 
 	public User login(User user);
+
+	public boolean updateUser(User user);
+
+	public User addUser(User user);
 
 	public boolean addItems(Items item);
 

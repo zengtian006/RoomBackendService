@@ -25,13 +25,13 @@ public class RoomServicesImp implements RoomServices, Serializable {
 	public List<User> getUUID() {
 		return roomDAO.getUUID();
 	}
-	
+
 	@Transactional(readOnly = false)
 	@Override
 	public void addTAGS() {
 		roomDAO.addTAGS();
 	}
-	
+
 	@Transactional(readOnly = false)
 	@Override
 	public void addUUID() {
@@ -90,5 +90,17 @@ public class RoomServicesImp implements RoomServices, Serializable {
 	public List<Items> findAlmostOverdueItem(String interval, String now) {
 		// TODO Auto-generated method stub
 		return roomDAO.findAlmostOverdueItem(interval, now);
+	}
+
+	@Override
+	public boolean updateUser(User user) {
+		// TODO Auto-generated method stub
+		return roomDAO.updateUser(user);
+	}
+
+	@Override
+	public User addUser(User user) {
+		// TODO Auto-generated method stub
+		return roomDAO.addUser(user);
 	}
 }

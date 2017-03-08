@@ -76,6 +76,23 @@ public class RoomWS implements Serializable {
 	}
 
 	@POST
+	@Path("updateUser")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String updateUser(User user) {
+		boolean result = roomServices.updateUser(user);
+		return String.valueOf(result);
+	}
+
+	@POST
+	@Path("addUser")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public User addUser(User user) {
+		return roomServices.addUser(user);
+	}
+
+	@POST
 	@Path("addLikes")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String addTAGS() {
