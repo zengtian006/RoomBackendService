@@ -204,6 +204,11 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<!--  <dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>org.eclipse.persistence.moxy</artifactId>
+			<version>2.5.0</version>
+		</dependency>-->
 	</dependencies>
 
 	<build>
@@ -235,14 +240,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	<repositories>
-		<repository>
-			<id>companyname.lib1</id>
-			<url>http://download.companyname.org/maven2/lib1</url>
-		</repository>
-		<repository>
-			<id>companyname.lib2</id>
-			<url>http://download.companyname.org/maven2/lib2</url>
-		</repository>
-	</repositories>
 </project>
