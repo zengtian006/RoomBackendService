@@ -50,9 +50,9 @@ public class RoomServicesImp implements RoomServices, Serializable {
 	}
 
 	@Override
-	public List<Items> findAllItems(String user_id) {
+	public List<Items> findAllItems(User user) {
 		// TODO Auto-generated method stub
-		return roomDAO.findAllItems(user_id);
+		return roomDAO.findAllItems(user);
 	}
 
 	@Override
@@ -87,9 +87,9 @@ public class RoomServicesImp implements RoomServices, Serializable {
 	}
 
 	@Override
-	public List<Items> findAlmostOverdueItem(String interval, String now) {
+	public List<Items> findAlmostOverdueItem(String interval, String now,String user_id) {
 		// TODO Auto-generated method stub
-		return roomDAO.findAlmostOverdueItem(interval, now);
+		return roomDAO.findAlmostOverdueItem(interval, now,user_id);
 	}
 
 	@Override

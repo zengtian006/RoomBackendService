@@ -25,7 +25,7 @@ public interface RoomServices {
 
 	public boolean addItems(Items item);
 
-	public List<Items> findAllItems(String user_id);
+	public List<Items> findAllItems(User user);
 
 	public List<Categories> findManCategories();
 
@@ -37,6 +37,6 @@ public interface RoomServices {
 
 	public List<Items> findAllGlobalItems();
 
-	public List<Items> findAlmostOverdueItem(String interval, String now);
+	public List<Items> findAlmostOverdueItem(String interval, String now,String user_id);
 
 }

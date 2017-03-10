@@ -138,7 +138,6 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 		Session session = null;
 		Transaction tx = null;
 		try {
-			item.setDate(null);// delete later
 			session = sessionFactory.openSession();
 			tx = session.beginTransaction();
 			session.persist(item);
@@ -171,16 +170,27 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Items> findAllItems(String user_id) {
+	public List<Items> findAllItems(User user) {
 		Session session = null;
+		String user_id = user.getId().toString().replaceAll("-", "");
 
 		try {
 			session = sessionFactory.openSession();
 			System.out.println("user id: " + user_id);
-			List<Items> items = (List<Items>) session
-					.createQuery(
-							"FROM Items i WHERE hex(user.id) =:user_id ORDER BY i.created DESC")
-					.setParameter("user_id", user_id).getResultList();
+			List<Items> items = new ArrayList<>();
+
+			if (user.getIsPublic() == null) {
+				items = (List<Items>) session
+						.createQuery(
+								"FROM Items i WHERE hex(user.id) =:user_id ORDER BY i.created DESC")
+						.setParameter("user_id", user_id).getResultList();
+			} else if (user.getIsPublic().equals("1")) {
+				items = (List<Items>) session
+						.createQuery(
+								"FROM Items i WHERE hex(user.id) =:user_id and global =:global ORDER BY i.created DESC")
+						.setParameter("user_id", user_id)
+						.setParameter("global", "1").getResultList();
+			}
 			// for (Items item : items) {
 			// Iterator<ItemTags> iterator = item.getItemTags().iterator();
 			// List<String> tagList = new ArrayList<>();
@@ -325,8 +335,11 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Items> findAlmostOverdueItem(String interval, String now) {
+	public List<Items> findAlmostOverdueItem(String interval, String now,
+			String user_id) {
 		Session session = null;
+		user_id = user_id.replaceAll("-", "");
+
 		System.out.println("INTERVAL: " + interval);
 		System.out.println("now: " + now);
 
@@ -336,14 +349,16 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 			if (interval.equals(now)) {// already overduedItem
 				users = (List<Items>) session
 						.createQuery(
-								"FROM Items i where i.expDate< :now ORDER BY i.expDate ASC")
-						.setParameter("now", now).getResultList();
+								"FROM Items i where i.expDate< :now and hex(user.id) =:user_id ORDER BY i.expDate ASC")
+						.setParameter("now", now)
+						.setParameter("user_id", user_id).getResultList();
 			} else {
 				users = (List<Items>) session
 						.createQuery(
-								"FROM Items i where i.expDate<= :interval and i.expDate>= :now ORDER BY i.expDate ASC")
+								"FROM Items i where i.expDate<= :interval and i.expDate>= :now and hex(user.id) =:user_id ORDER BY i.expDate ASC")
 						.setParameter("interval", interval)
-						.setParameter("now", now).getResultList();
+						.setParameter("now", now)
+						.setParameter("user_id", user_id).getResultList();
 
 			}
 			return users;

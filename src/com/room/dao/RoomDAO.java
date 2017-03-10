@@ -22,7 +22,7 @@ public interface RoomDAO {
 
 	public boolean addItems(Items item);
 
-	public List<Items> findAllItems(String user_id);
+	public List<Items> findAllItems(User user);
 
 	public List<Categories> findManCategories();
 
@@ -34,5 +34,6 @@ public interface RoomDAO {
 
 	public List<Items> findAllGlobalItems();
 
-	public List<Items> findAlmostOverdueItem(String interval, String now);
+	public List<Items> findAlmostOverdueItem(String interval, String now,
+			String user_id);
 };

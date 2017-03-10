@@ -31,6 +31,8 @@ public class User implements java.io.Serializable {
 	private String password;
 	private String roomName;
 	private String gender;
+	private String isPublic; // when find all items (ONLY need public items "1"
+								// or all items "0")
 
 	public String getRoomName() {
 		return roomName;
@@ -73,6 +75,14 @@ public class User implements java.io.Serializable {
 	}
 
 	public User() {
+	}
+
+	public String getIsPublic() {
+		return isPublic;
+	}
+
+	public void setIsPublic(String isPublic) {
+		this.isPublic = isPublic;
 	}
 
 }

@@ -122,15 +122,16 @@ public class RoomWS implements Serializable {
 		return String.valueOf(roomServices.addItems(item));
 	}
 
-	@GET
-	@Path("/findAllItemsTest/{userid}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public List<Items> findAllItemsTest(@PathParam("userid") String user_id) {
-		// UUID uuid = UUID.fromString(user_id);
-		String hex_user_id = user_id.replaceAll("-", "");
-		System.out.println("haha:" + hex_user_id);
-		return roomServices.findAllItems(hex_user_id);
-	}
+	// @GET
+	// @Path("/findAllItemsTest/{userid}")
+	// @Consumes(MediaType.APPLICATION_JSON)
+	// public List<Items> findAllItemsTest(@PathParam("userid") String user_id)
+	// {
+	// // UUID uuid = UUID.fromString(user_id);
+	// String hex_user_id = user_id.replaceAll("-", "");
+	// System.out.println("haha:" + hex_user_id);
+	// return roomServices.findAllItems(hex_user_id);
+	// }
 
 	@POST
 	@Path("findAllItems")
@@ -139,8 +140,7 @@ public class RoomWS implements Serializable {
 	public List<ItemSeries> findAllItems(User user) {
 		List<ItemSeries> itemSeriesList = new ArrayList<ItemSeries>();
 
-		String user_id = user.getId().toString().replaceAll("-", "");
-		List<Items> items = roomServices.findAllItems(user_id);
+		List<Items> items = roomServices.findAllItems(user);
 
 		// init Categroy
 		List<Categories> categories = new ArrayList<Categories>();
@@ -312,14 +312,16 @@ public class RoomWS implements Serializable {
 	}
 
 	@GET
-	@Path("findAlmostOverdueItem/{date}")
+	@Path("findAlmostOverdueItem/{date}/{userId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Items> findAlmostOverdueItem(@PathParam("date") Integer date) {
+	public List<Items> findAlmostOverdueItem(@PathParam("date") Integer date,
+			@PathParam("userId") String user_id) {
+		System.out.print("USERID:" + user_id);
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar c = Calendar.getInstance();
 		String now = df.format(c.getTime());
 		c.add(Calendar.MONTH, date);
 		String interval = df.format(c.getTime());
-		return roomServices.findAlmostOverdueItem(interval, now);
+		return roomServices.findAlmostOverdueItem(interval, now, user_id);
 	}
 }
