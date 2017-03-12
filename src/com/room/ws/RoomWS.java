@@ -155,6 +155,7 @@ public class RoomWS implements Serializable {
 				ItemSeries itemSeries = new ItemSeries();
 				itemSeries.setCate_id(cate.getId());
 				itemSeries.setTitle(cate.getCateName());
+				itemSeries.setTitle_cn(cate.getCateNameCn());
 				List<Items> filetedAllItems = new ArrayList<Items>();
 				for (Categories subcate : categories) {
 					if (subcate.getParentId() == cate.getId()) {
@@ -220,7 +221,11 @@ public class RoomWS implements Serializable {
 				}
 				itemSeries.setAllTagsMap(tagEntryList);
 				itemSeries.setItems(filetedAllItems);
-				itemSeriesList.add(itemSeries);
+				if (itemSeries.getTitle().equals("collocation")) {
+					itemSeriesList.add(0, itemSeries);
+				} else {
+					itemSeriesList.add(itemSeries);
+				}
 			}
 		}
 

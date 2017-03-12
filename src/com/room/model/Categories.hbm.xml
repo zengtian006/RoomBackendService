@@ -12,6 +12,9 @@
 		<property name="cateName" type="string">
 			<column name="cate_name" length="45" />
 		</property>
+		<property name="cateNameCn" type="string">
+			<column name="cate_name_cn" length="45" />
+		</property>
 		<property name="parentId" type="java.lang.Integer">
 			<column name="parent_id" />
 		</property>

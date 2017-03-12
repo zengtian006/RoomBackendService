@@ -10,6 +10,7 @@ public class Categories implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String cateName;
+	private String cateNameCn;
 	private Integer parentId;
 
 	public Categories() {
@@ -42,6 +43,14 @@ public class Categories implements java.io.Serializable {
 
 	public void setParentId(Integer parentId) {
 		this.parentId = parentId;
+	}
+
+	public String getCateNameCn() {
+		return cateNameCn;
+	}
+
+	public void setCateNameCn(String cateNameCn) {
+		this.cateNameCn = cateNameCn;
 	}
 
 }

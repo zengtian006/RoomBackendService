@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class ItemSeries {
 	private String title;
+	private String title_cn;
 	private Integer cate_id;
 	private List<Items> items;
 	private List<TagEntry> allTagsMap;
@@ -39,5 +40,13 @@ public class ItemSeries {
 
 	public void setAllTagsMap(List<TagEntry> allTagsMap) {
 		this.allTagsMap = allTagsMap;
+	}
+
+	public String getTitle_cn() {
+		return title_cn;
+	}
+
+	public void setTitle_cn(String title_cn) {
+		this.title_cn = title_cn;
 	}
 }
