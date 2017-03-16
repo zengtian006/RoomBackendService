@@ -33,6 +33,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import com.room.model.ItemLikes;
 import com.room.model.ItemSeason;
 import com.room.model.ItemSeries;
 import com.room.model.ItemTags;
@@ -328,5 +329,14 @@ public class RoomWS implements Serializable {
 		c.add(Calendar.MONTH, date);
 		String interval = df.format(c.getTime());
 		return roomServices.findAlmostOverdueItem(interval, now, user_id);
+	}
+
+	@POST
+	@Path("updateItemLike")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String updateItemLike(ItemLikes itemLike) {
+		boolean result = roomServices.updateItemLike(itemLike);
+		return String.valueOf(result);
 	}
 }

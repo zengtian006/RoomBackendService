@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import javax.enterprise.inject.Default;
 
+import com.room.model.ItemLikes;
 import com.room.model.Items;
 import com.room.model.Categories;
 import com.room.model.User;
@@ -38,5 +39,7 @@ public interface RoomServices {
 	public List<Items> findAllGlobalItems();
 
 	public List<Items> findAlmostOverdueItem(String interval, String now,String user_id);
+	
+	public boolean updateItemLike(ItemLikes itemLike);
 
 }

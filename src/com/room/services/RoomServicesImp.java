@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.room.dao.RoomDAO;
+import com.room.model.ItemLikes;
 import com.room.model.Items;
 import com.room.model.Categories;
 import com.room.model.User;
@@ -102,5 +103,11 @@ public class RoomServicesImp implements RoomServices, Serializable {
 	public User addUser(User user) {
 		// TODO Auto-generated method stub
 		return roomDAO.addUser(user);
+	}
+
+	@Override
+	public boolean updateItemLike(ItemLikes itemLike) {
+		// TODO Auto-generated method stub
+		return roomDAO.updateItemLike(itemLike);
 	}
 }

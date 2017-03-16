@@ -57,15 +57,15 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 		Session session = null;
 		Transaction tx = null;
 
-		ItemLikes like = new ItemLikes();
-		like.setItemId(UUID.fromString("0a00036a-5a89-1bbb-815a-893be4070000"));
-		like.setUserId(UUID.fromString("0a00036a-5a26-1b79-815a-269d607e0000"));
+		// ItemLikes like = new ItemLikes();
+		// like.setItemId(UUID.fromString("0a00036a-5a89-1bbb-815a-893be4070000"));
+		// like.setUserId(UUID.fromString("0a00036a-5a26-1b79-815a-269d607e0000"));
 		// user.setId(uuId);
 
 		try {
 			session = sessionFactory.openSession();
 			tx = session.beginTransaction();
-			session.persist(like);
+			// session.persist(like);
 			tx.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -411,6 +411,44 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 			e.printStackTrace();
 			tx.rollback();
 			return null;
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+				session = null;
+			}
+		}
+	}
+
+	@Override
+	public boolean updateItemLike(ItemLikes itemLike) {
+		Session session = null;
+		Transaction tx = null;
+
+		try {
+			session = sessionFactory.openSession();
+			tx = session.beginTransaction();
+
+			String item_id = itemLike.getItemId().toString()
+					.replaceAll("-", "");
+			String user_id = itemLike.getUserId().toString()
+					.replaceAll("-", "");
+			@SuppressWarnings("unchecked")
+			List<ItemLikes> hasLiked = (List<ItemLikes>) session
+					.createQuery(
+							"FROM ItemLikes where hex(item_id) = :item_id and hex(user_id) = :user_id")
+					.setParameter("item_id", item_id)
+					.setParameter("user_id", user_id).getResultList();
+			if (hasLiked.size() > 0) {
+				session.delete(hasLiked.get(0));
+			} else {
+				session.persist(itemLike);
+			}
+			tx.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tx.rollback();
+			return false;
 		} finally {
 			if (session != null && session.isOpen()) {
 				session.close();

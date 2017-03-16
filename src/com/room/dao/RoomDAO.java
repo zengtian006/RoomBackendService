@@ -3,6 +3,7 @@ package com.room.dao;
 import java.util.List;
 
 import com.room.model.Categories;
+import com.room.model.ItemLikes;
 import com.room.model.Items;
 import com.room.model.User;
 
@@ -36,4 +37,6 @@ public interface RoomDAO {
 
 	public List<Items> findAlmostOverdueItem(String interval, String now,
 			String user_id);
+
+	public boolean updateItemLike(ItemLikes itemLike);
 };
