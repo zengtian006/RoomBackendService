@@ -494,10 +494,12 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 				tx.commit();
 				System.out.println("SIZE: " + items.size());
 				System.out.println("title: " + items.get(0).getTitle());
+				tx.commit();
 				return items;
+			} else {
+				tx.commit();
+				return null;
 			}
-			tx.commit();
-			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
 			tx.rollback();

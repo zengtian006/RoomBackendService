@@ -39,6 +39,7 @@ import com.room.model.ItemSeries;
 import com.room.model.ItemTags;
 import com.room.model.Items;
 import com.room.model.Categories;
+import com.room.model.ItemsResponse;
 import com.room.model.TagEntry;
 import com.room.model.User;
 import com.room.model.UserResponse;
@@ -349,8 +350,14 @@ public class RoomWS implements Serializable {
 	@Path("findAllLikedItems")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public List<Items> findAllLikedItems(User user) {
+	public ItemsResponse findAllLikedItems(User user) {
 		List<Items> items = roomServices.findAllLikedItems(user);
+		ItemsResponse itemResponse = new ItemsResponse();
+
+		if (items == null) {
+			itemResponse.setSuccess(false);// no Liked items
+			return itemResponse;
+		}
 		for (Items item : items) {
 			List<String> tagList = new ArrayList<>();
 			for (ItemTags tag : item.getItemTags()) {
@@ -370,7 +377,9 @@ public class RoomWS implements Serializable {
 			}
 			item.setSeasons(seasonList);
 		}
-		return items;
+		itemResponse.setItems(items);
+		itemResponse.setSuccess(true);
+		return itemResponse;
 
 	}
 }
