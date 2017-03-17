@@ -70,9 +70,14 @@ public class RoomWS implements Serializable {
 	public UserResponse login(User user) {
 		User loginUser = roomServices.login(user);
 		UserResponse userResponse = new UserResponse();
-		userResponse.setStatus("YES");
-		userResponse.setSuccess(true);
-		userResponse.setUser(loginUser);
+		if (loginUser == null) {
+			userResponse.setStatus("Wrong Username or Email.");
+			userResponse.setSuccess(false);
+		} else {
+			userResponse.setStatus("YES");
+			userResponse.setSuccess(true);
+			userResponse.setUser(loginUser);
+		}
 		return userResponse;
 	}
 
