@@ -178,6 +178,11 @@ public class RoomWS implements Serializable {
 
 					}
 				}
+				if (user.getIsPublic() != null
+						&& user.getIsPublic().equals("1")
+						&& filetedAllItems.size() <= 0) {
+					continue;
+				}
 				Collections.sort(filetedAllItems);
 
 				// init Tags like season
