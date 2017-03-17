@@ -491,7 +491,6 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 								"FROM Items WHERE hex(id) IN (:item_id_list) ORDER BY created DESC")
 						.setParameter("item_id_list", itemIdList)
 						.getResultList();
-				tx.commit();
 				System.out.println("SIZE: " + items.size());
 				System.out.println("title: " + items.get(0).getTitle());
 				tx.commit();
