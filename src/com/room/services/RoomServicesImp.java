@@ -117,4 +117,10 @@ public class RoomServicesImp implements RoomServices, Serializable {
 		// TODO Auto-generated method stub
 		return roomDAO.findAllLikedItems(user);
 	}
+
+	@Override
+	public String checkUsername(String username) {
+		// TODO Auto-generated method stub
+		return roomDAO.checkUsername(username);
+	}
 }

@@ -82,6 +82,12 @@ public class RoomWS implements Serializable {
 		return userResponse;
 	}
 
+	@GET
+	@Path("checkUsername/{userName}")
+	public String checkUsername(@PathParam("userName") String username) {
+		return roomServices.checkUsername(username);
+	}
+
 	@POST
 	@Path("updateUser")
 	@Produces(MediaType.APPLICATION_JSON)

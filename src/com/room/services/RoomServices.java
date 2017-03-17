@@ -19,6 +19,8 @@ public interface RoomServices {
 	public void addUUID();
 
 	public User login(User user);
+	
+	public String checkUsername(String username);
 
 	public boolean updateUser(User user);
 

@@ -511,4 +511,32 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 
 		}
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public String checkUsername(String username) {
+		Session session = null;
+
+		try {
+			session = sessionFactory.openSession();
+			List<Items> users = (List<Items>) session
+					.createQuery(
+							"FROM User where name =:name")
+					.setParameter("name", username).getResultList();
+			if(users.size()>0){
+				return "Login";
+			}else{
+				return "Register";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+				session = null;
+			}
+
+		}
+	}
 }

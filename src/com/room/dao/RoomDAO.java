@@ -16,6 +16,8 @@ public interface RoomDAO {
 	public void addTAGS();
 
 	public User login(User user);
+	
+	public String checkUsername(String username);
 
 	public boolean updateUser(User user);
 
