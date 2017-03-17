@@ -456,4 +456,58 @@ public class RoomDAOImp implements RoomDAO, Serializable {
 			}
 		}
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Items> findAllLikedItems(User user) {
+		Session session = null;
+		Transaction tx = null;
+
+		String user_id = user.getId().toString().replaceAll("-", "");
+
+		try {
+			session = sessionFactory.openSession();
+			tx = session.beginTransaction();
+
+			System.out.println("user id: " + user_id);
+			List<ItemLikes> itemLikeList = (List<ItemLikes>) session
+					.createQuery("FROM ItemLikes WHERE hex(userId) =:user_id")
+					.setParameter("user_id", user_id).getResultList();
+			if (itemLikeList.size() > 0) {
+				String itemIdString = "";
+				List<String> itemIdList = new ArrayList<>();
+				for (ItemLikes itemLike : itemLikeList) {
+					String item_id = itemLike.getItemId().toString()
+							.replaceAll("-", "");
+					itemIdList.add(item_id);
+					itemIdString += item_id + ",";
+				}
+				itemIdString = itemIdString.substring(0,
+						itemIdString.length() - 1);
+				System.out.println("IdList: " + itemIdString);
+
+				List<Items> items = (List<Items>) session
+						.createQuery(
+								"FROM Items WHERE hex(id) IN (:item_id_list) ORDER BY created DESC")
+						.setParameter("item_id_list", itemIdList)
+						.getResultList();
+				tx.commit();
+				System.out.println("SIZE: " + items.size());
+				System.out.println("title: " + items.get(0).getTitle());
+				return items;
+			}
+			tx.commit();
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tx.rollback();
+			return null;
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+				session = null;
+			}
+
+		}
+	}
 }

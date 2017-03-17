@@ -339,4 +339,33 @@ public class RoomWS implements Serializable {
 		boolean result = roomServices.updateItemLike(itemLike);
 		return String.valueOf(result);
 	}
+
+	@POST
+	@Path("findAllLikedItems")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public List<Items> findAllLikedItems(User user) {
+		List<Items> items = roomServices.findAllLikedItems(user);
+		for (Items item : items) {
+			List<String> tagList = new ArrayList<>();
+			for (ItemTags tag : item.getItemTags()) {
+				tagList.add(tag.getTag());
+			}
+			item.setTags(tagList);
+
+			if (item.getItemLikes().isEmpty()) {
+				item.setLikesCount(0);
+			} else {
+				item.setLikesCount(item.getItemLikes().size());
+			}
+
+			List<String> seasonList = new ArrayList<>();
+			for (ItemSeason season : item.getItemSeason()) {
+				seasonList.add(season.getSeason());
+			}
+			item.setSeasons(seasonList);
+		}
+		return items;
+
+	}
 }

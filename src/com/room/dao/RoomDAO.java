@@ -39,4 +39,6 @@ public interface RoomDAO {
 			String user_id);
 
 	public boolean updateItemLike(ItemLikes itemLike);
-};
+	
+	public List<Items> findAllLikedItems(User user);
+}

@@ -38,8 +38,10 @@ public interface RoomServices {
 
 	public List<Items> findAllGlobalItems();
 
-	public List<Items> findAlmostOverdueItem(String interval, String now,String user_id);
-	
+	public List<Items> findAlmostOverdueItem(String interval, String now,
+			String user_id);
+
 	public boolean updateItemLike(ItemLikes itemLike);
 
+	public List<Items> findAllLikedItems(User user);
 }

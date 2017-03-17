@@ -88,9 +88,10 @@ public class RoomServicesImp implements RoomServices, Serializable {
 	}
 
 	@Override
-	public List<Items> findAlmostOverdueItem(String interval, String now,String user_id) {
+	public List<Items> findAlmostOverdueItem(String interval, String now,
+			String user_id) {
 		// TODO Auto-generated method stub
-		return roomDAO.findAlmostOverdueItem(interval, now,user_id);
+		return roomDAO.findAlmostOverdueItem(interval, now, user_id);
 	}
 
 	@Override
@@ -109,5 +110,11 @@ public class RoomServicesImp implements RoomServices, Serializable {
 	public boolean updateItemLike(ItemLikes itemLike) {
 		// TODO Auto-generated method stub
 		return roomDAO.updateItemLike(itemLike);
+	}
+
+	@Override
+	public List<Items> findAllLikedItems(User user) {
+		// TODO Auto-generated method stub
+		return roomDAO.findAllLikedItems(user);
 	}
 }
